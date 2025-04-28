@@ -25,6 +25,7 @@ public class StoreApplication {
                         .build();
 
         user.setProfile(profile);
+        profile.setUser(user);
 
         System.out.println(user);
     }
