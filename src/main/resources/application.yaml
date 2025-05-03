@@ -1,16 +1,32 @@
+# Base configuration
 spring:
+  profiles:
+    active: dev  # Default active profile unless overridden
+
+---
+
+# Dev profile settings
+spring:
+  config:
+    activate:
+      on-profile: dev
+
   application:
     name: store
+
   datasource:
     url: jdbc:mysql://localhost:3306/store?createDatabaseIfNotExist=true
     username: root
-    password: MyPassword!
+    password: ${DB_PASSWORD_DEV}  # pulled from environment variable
+
 stripe:
   apiUrl: https://api.stripe.com
   timeout: 1000
   enabled: true
   supported-currencies: USD,EUR,GBP
+
 payment-gateway: paypal
+
 mail:
   host: https://smtp.gmail.com
   port: 5761
