@@ -19,6 +19,9 @@ spring:
     username: root
     password: ${DB_PASSWORD_DEV}  # pulled from environment variable
 
+  jpa:
+    show-sql: true
+
 stripe:
   apiUrl: https://api.stripe.com
   timeout: 1000
