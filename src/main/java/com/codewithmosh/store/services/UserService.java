@@ -11,6 +11,8 @@ import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @AllArgsConstructor
 @Service
@@ -57,14 +59,9 @@ public class UserService {
 
     @Transactional
     public void manageProducts() {
-        var category = categoryRepository.findById((byte) 2).orElseThrow();
-
-        var product = Product.builder()
-                .name("Dog Food")
-                .price(BigDecimal.valueOf(22.99))
-                .category(category)
-                .build();
-
-        productRepository.save(product);
+        var user = userRepository.findById(3L).orElseThrow();
+        var products = productRepository.findAll();
+        products.forEach(user::addFavoriteProduct);
+        userRepository.save(user);
     }
 }
