@@ -20,8 +20,11 @@ public class StoreApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(StoreApplication.class, args);
-        var userService = context.getBean(UserService.class);
-        userService.manageProducts();
+        var categoryRepository = context.getBean(CategoryRepository.class);
+        var category = categoryRepository.findById((byte) 1).orElseThrow();
+        var productRepository = context.getBean(ProductRepository.class);
+        var product = productRepository.findByCategory(category);
+        System.out.println(product);
     }
 
 }
